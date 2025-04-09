@@ -17,7 +17,7 @@ interface PlayerState {
   health: number;
   baseMaxHealth: number;
   baseDamage: number;
-  armor: number;
+  baseArmor: number;
   gold: number;
   level: number;
   experience: number;
@@ -30,7 +30,7 @@ export const usePlayerStore = defineStore('player', {
     health: 100,
     baseMaxHealth: 100,
     baseDamage: 10,
-    armor: 0,
+    baseArmor: 0,
     gold: 100,
     level: 1,
     experience: 0,
@@ -76,7 +76,8 @@ export const usePlayerStore = defineStore('player', {
     },
 
     takeDamage(amount: number) {
-      const actualDamage = Math.floor(amount * (100 / (100 + this.armor)))
+      const actualDamage = Math.floor(amount * (100 / (100 + this.baseArmor)))
+      console.log(actualDamage)
       this.health = Math.max(0, this.health - actualDamage);
       return this.health === 0;
     },
@@ -98,7 +99,7 @@ export const usePlayerStore = defineStore('player', {
       this.experience = 0;
       this.baseMaxHealth += 20;
       this.health = this.baseMaxHealth;
-      this.armor += 10;
+      this.baseArmor += 10;
       this.baseDamage += 5;
     },
 
@@ -187,7 +188,7 @@ export const usePlayerStore = defineStore('player', {
   getters: {
     damage: (state) => state.baseDamage + (state.equipment.weapon ? ITEMS.find(i => i.id === state.equipment.weapon)?.damage || 0 : 0) + (state.equipment.armor ? ITEMS.find(i => i.id === state.equipment.armor)?.damage || 0 : 0) + (state.equipment.accessory1 ? ITEMS.find(i => i.id === state.equipment.accessory1)?.damage || 0 : 0) + (state.equipment.accessory2 ? ITEMS.find(i => i.id === state.equipment.accessory2)?.damage || 0 : 0),
     maxHealth: (state) => state.baseMaxHealth + (state.equipment.armor ? ITEMS.find(i => i.id === state.equipment.armor)?.health || 0 : 0) + (state.equipment.accessory1 ? ITEMS.find(i => i.id === state.equipment.accessory1)?.health || 0 : 0) + (state.equipment.accessory2 ? ITEMS.find(i => i.id === state.equipment.accessory2)?.health || 0 : 0),
-    armor: (state) => state.armor + (state.equipment.armor ? ITEMS.find(i => i.id === state.equipment.armor)?.armor || 0 : 0) + (state.equipment.accessory1 ? ITEMS.find(i => i.id === state.equipment.accessory1)?.armor || 0 : 0) + (state.equipment.accessory2 ? ITEMS.find(i => i.id === state.equipment.accessory2)?.armor || 0 : 0),
+    armor: (state) => state.baseArmor + (state.equipment.armor ? ITEMS.find(i => i.id === state.equipment.armor)?.armor || 0 : 0) + (state.equipment.accessory1 ? ITEMS.find(i => i.id === state.equipment.accessory1)?.armor || 0 : 0) + (state.equipment.accessory2 ? ITEMS.find(i => i.id === state.equipment.accessory2)?.armor || 0 : 0),
     isDead: (state) => state.health <= 0,
     inventorySize: (state) => state.inventory.length,
     hasItem: (state) => (itemId: string) =>

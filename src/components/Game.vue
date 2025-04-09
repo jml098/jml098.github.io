@@ -27,7 +27,7 @@
           </div>
         </div>
         <div class="stat">Damage: {{ player.damage }}</div>
-        <div class="stat">Armor: {{ player.armor }}</div>
+        <div class="stat">Armor: {{ player.baseArmor }}</div>
         <div class="stat">Gold: {{ player.gold }}</div>
         <div class="stat">Level: {{ player.level }}</div>
         <div class="stat">XP: {{ player.experience }}</div>
