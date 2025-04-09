@@ -6,7 +6,7 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/', // Changed to root path for GitHub Pages
+  base: '/jml098.github.io/', // Updated to match your GitHub Pages URL
   plugins: [
     vue(),
   ],
