@@ -6,7 +6,7 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/rpg-clicker/', // Replace 'ai-clicker' with your repository name
+  base: '/', // Changed to root path for GitHub Pages
   plugins: [
     vue(),
   ],
