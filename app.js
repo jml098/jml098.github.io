@@ -40,7 +40,7 @@ const app = createApp({
         top: `${targetY.value}px`,
       };
     });
-    
+
     // Computed styles for the mouse cursor debug element
     const mouseCursorStyle = computed(() => {
       return {
@@ -98,8 +98,15 @@ const app = createApp({
         movementParams.nextDirectionChange -= deltaTime * 1000;
         if (movementParams.nextDirectionChange <= 0) {
           // Set a new target direction
-          movementParams.targetDirectionX = getRandomDirection();
-          movementParams.nextDirectionChange = getRandomTime(250, 750); // Random timing for changes
+          const c =
+            ((Math.abs(gameWidth.value - gameWidth.value / 2 - targetX.value) *
+              2) /
+              100) **
+            2.5;
+          if (Math.random() < c) {
+            movementParams.targetDirectionX = getRandomDirection();
+            movementParams.nextDirectionChange = (1 - c) * 500;
+          }
         }
       }
 
